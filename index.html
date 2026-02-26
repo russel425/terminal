@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apex Terminal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">apex_terminal<span>.v2</span></div>
+      <div class="status-row">
+        <div class="pill">latency=<strong id="latency">32ms</strong></div>
+        <div class="pill">market=<strong id="marketState">OPEN</strong></div>
+        <div class="pill">user=<strong>TRADER-01</strong></div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="panel watchlist">
+        <h2>// watchlist</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Last</th>
+              <th>Chg%</th>
+              <th>Vol</th>
+            </tr>
+          </thead>
+          <tbody id="watchlistBody"></tbody>
+        </table>
+      </section>
+
+      <section class="panel chart-panel">
+        <div class="panel-title-row">
+          <h2 id="chartTitle">AAPL · intraday</h2>
+          <div class="mini-controls">
+            <button data-range="1H" class="range-btn active">1H</button>
+            <button data-range="1D" class="range-btn">1D</button>
+            <button data-range="1W" class="range-btn">1W</button>
+          </div>
+        </div>
+        <canvas id="priceChart" width="900" height="300"></canvas>
+        <div class="book-row">
+          <div>
+            <h3>// bid</h3>
+            <ul id="bidBook"></ul>
+          </div>
+          <div>
+            <h3>// ask</h3>
+            <ul id="askBook"></ul>
+          </div>
+          <div>
+            <h3>// recent_trades</h3>
+            <ul id="tape"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel blotter">
+        <h2>// execution_blotter</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Side</th>
+              <th>Symbol</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="blotterBody"></tbody>
+        </table>
+      </section>
+
+      <section class="panel order-ticket">
+        <h2>// order_ticket</h2>
+        <form id="orderForm">
+          <label>
+            Symbol
+            <input id="symbolInput" value="AAPL" required />
+          </label>
+          <label>
+            Side
+            <select id="sideInput">
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+            </select>
+          </label>
+          <label>
+            Quantity
+            <input id="qtyInput" type="number" min="1" value="100" required />
+          </label>
+          <label>
+            Limit Price
+            <input id="priceInput" type="number" min="0" step="0.01" value="195.42" required />
+          </label>
+          <button type="submit">Send Order</button>
+        </form>
+      </section>
+
+      <section class="panel news">
+        <div class="news-header">
+          <h2>// live_news_wire</h2>
+          <span id="newsUpdatedAt" class="news-timestamp">Updated --:--:--</span>
+        </div>
+        <div id="newsSource" class="news-source">Source: initializing...</div>
+        <ul id="newsFeed"></ul>
+      </section>
+
+      <section class="panel portfolio">
+        <h2>// portfolio_snapshot</h2>
+        <div id="portfolioCards" class="cards"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
